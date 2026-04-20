@@ -71,7 +71,7 @@ public class DeviceController {
                 device.setDeviceImage("default-image.jpg");
             }
             deviceService.addDevice(device);
-            return "redirect:/view-device";
+            return "redirect:/viewDevice";
         } catch (IOException e) {
             return "add-device";
         }
@@ -80,18 +80,18 @@ public class DeviceController {
     @GetMapping("/deleteDevice/{id}")
     public String deleteDevice(@PathVariable("id") Long id) {
         deviceService.deleteDevice(id);
-        return "redirect:/view-device";
+        return "redirect:/viewDevice";
     }
 
     @GetMapping("/editDevice/{id}")
     public String editDeviceForm(@PathVariable("id") Long id, Model model) {
         Device device = deviceService.getDeviceById(id);
         if (device != null) {
-            model.addAttribute("deivice", device);
+            model.addAttribute("device", device);
             model.addAttribute("isEdit", true);
             return "add-device";
         }
-        return "redirect:/view-device";
+        return "redirect:/viewDevice";
     }
 
     @PostMapping("/updateDevice")
@@ -125,7 +125,7 @@ public class DeviceController {
                 deviceService.updateDevice(device);
             }
 
-            return "redirect:/view-device";
+            return "redirect:/viewDevice";
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
